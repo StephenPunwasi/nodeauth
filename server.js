@@ -31,12 +31,12 @@ require('./app/routes.js')(app, passport);
 
 // 404 ERROR RESPONSE
 app.use(function(req, res) {
-   res.send('404: Page not Found', 404);
+ res.render('404.ejs', 404);
 });
 
 // 500 ERROR RESPONSE
 app.use(function(error, req, res, next) {
-   res.send('500: Internal Server Error', 500);
+   res.render('500.ejs', 500);
 });
 
 app.listen(port);
