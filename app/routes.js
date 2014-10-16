@@ -13,6 +13,13 @@ module.exports = function(app, passport){
       });
   });
 
+  //PROFILE PAGE
+  app.get('/administrator', isLoggedIn, function(req, res){
+      res.render('admin.ejs', {
+        user:req.user
+      });
+  });
+  
   //LOGOUT
   app.get('/logout', function(req,res){
       req.logout();
