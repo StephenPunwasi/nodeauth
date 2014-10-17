@@ -28,6 +28,7 @@ app.use(passport.session());
 app.use(flash());
 
 require('./app/routes.js')(app, passport);
+require('./app/admin-routes.js')(app, passport);
 
 // 404 ERROR RESPONSE
 app.use(function(req, res) {

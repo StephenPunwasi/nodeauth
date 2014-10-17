@@ -1,4 +1,4 @@
-var User = require('../app/models/user');
+var admin = require('../app/models/admin');
 
 module.exports = function(app, passport){
 
@@ -13,19 +13,6 @@ module.exports = function(app, passport){
       return next();
     res.redirect('/');
   }
-
-  //DOES THE USER HAVE ADMINISTRATOR PRIVILIDGES?
-  var requiresAdmin = function(req, res, next) {
-      if (req.isAuthenticated() && req.user.isAdmin === true)
-        next();
-      else
-        res.send(401, 'Unauthorized');
-    };
-
-  //ADMINISTRATOR PANEL
-  app.get('/administrator', requiresAdmin, function(req, res){
-      res.render('admin.ejs');
-  });
 
   //PROFILE PAGE
   app.get('/profile', isLoggedIn, function(req, res){
@@ -197,11 +184,5 @@ module.exports = function(app, passport){
     });
   });
 
-  app.get('/users', requiresAdmin, function (req, res) {
-    User.find({}, function (err, docs) {
-        res.json(docs);
-    });
-  });
-
-  //END OF EXPORTS
+//END OF EXPORTS
 };
