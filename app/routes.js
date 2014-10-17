@@ -1,3 +1,5 @@
+var User = require('../app/models/user');
+
 module.exports = function(app, passport){
 
   //HOME
@@ -194,4 +196,12 @@ module.exports = function(app, passport){
         res.redirect('/profile');
     });
   });
+
+  app.get('/users', requiresAdmin, function (req, res) {
+    User.find({}, function (err, docs) {
+        res.json(docs);
+    });
+  });
+
+  //END OF EXPORTS
 };
