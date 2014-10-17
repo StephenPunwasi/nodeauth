@@ -12,11 +12,11 @@ module.exports = function(app, passport){
 
   //ADMINISTRATOR PANEL
   app.get('/admin', requiresAdmin, function(req, res){
+    res.send(200, "Hey " + req.user._id)
   });
 
   //GET /USER – A LIST OF ALL USERS FOR ADMIN
   app.get('admin/users', requiresAdmin, function (req, res) {
-    console.log('admin area');
   });
 
   //PUT /USER - UPDATE A USER
@@ -24,7 +24,7 @@ module.exports = function(app, passport){
   });
 
   //DELETE /USER - DELETE A USER
-  app.put('admin/user/:id', requiresAdmin, function (req, res) {
+  app.delete('admin/user/:id', requiresAdmin, function (req, res) {
   });
 
 
