@@ -1,5 +1,3 @@
-var admin = require('../app/models/admin');
-
 module.exports = function(app, passport){
 
   //HOME
@@ -182,6 +180,25 @@ module.exports = function(app, passport){
     user.save(function(err){
         res.redirect('/profile');
     });
+  });
+
+
+  //DOES THE USER HAVE ADMINISTRATOR PRIVILIDGES?
+  var requiresAdmin = function(req, res, next) {
+      if (req.isAuthenticated() && req.user.isAdmin === true)
+        next();
+      else
+        res.send(401, 'Unauthorized');
+    };
+
+  //ADMINISTRATOR PANEL
+  app.get('/admininistrator', requiresAdmin, function(req, res){
+    res.render('admin.ejs');
+  });
+
+  //GET /USER – A LIST OF ALL USERS FOR ADMIN
+  app.get('admin/users', requiresAdmin, function (req, res) {
+    console.log('admin area');
   });
 
 //END OF EXPORTS

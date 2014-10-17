@@ -5,6 +5,13 @@
             <p>
               Authenticated request
             </p>
+            <p>
+              <ul>
+              	<% users.forEach(function(user) { %>
+              		<li><%= user %></li>
+              	<% }); %>
+              </ul>
+            </p>
           </div>
       </div>
 <% include footer %>
