@@ -181,6 +181,7 @@ module.exports = function(app, passport){
         res.redirect('/profile');
     });
   });
+<<<<<<< HEAD
 
 
   //DOES THE USER HAVE ADMINISTRATOR PRIVILIDGES?
@@ -202,4 +203,6 @@ module.exports = function(app, passport){
   });
 
 //END OF EXPORTS
+=======
+>>>>>>> parent of 2114846... Added Admin/Universal User Query
 };
