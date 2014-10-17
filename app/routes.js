@@ -5,6 +5,25 @@ module.exports = function(app, passport){
       res.render('index.ejs');
   });
 
+  //IS THE USER LOGGED IN? IF NOT REDIRECT TO HOMEPAGE
+  function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated())
+      return next();
+    res.redirect('/');
+  }
+
+  //DOES THE USER HAVE ADMINISTRATOR PRIVILIDGES?
+  var requiresAdmin = function(req, res, next) {
+      if (req.isAuthenticated() && req.user.isAdmin === true)
+        next();
+      else
+        res.send(401, 'Unauthorized');
+    };
+
+  //ADMINISTRATOR PANEL
+  app.get('/administrator', requiresAdmin, function(req, res){
+      res.render('admin.ejs');
+  });
 
   //PROFILE PAGE
   app.get('/profile', isLoggedIn, function(req, res){
@@ -19,7 +38,7 @@ module.exports = function(app, passport){
         user:req.user
       });
   });
-  
+
   //LOGOUT
   app.get('/logout', function(req,res){
       req.logout();
@@ -176,9 +195,3 @@ module.exports = function(app, passport){
     });
   });
 };
-
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated())
-    return next();
-  res.redirect('/');
-}

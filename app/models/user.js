@@ -10,20 +10,21 @@ var userSchema = mongoose.Schema({
       id          : String,
       token       : String,
       email       : String,
-      name        : String
+      name        : String,
     },
     twitter       : {
       id          : String,
       token       : String,
       displayName : String,
-      username    : String
+      username    : String,
     },
     google        : {
       id          : String,
       token       : String,
       email       : String,
-      name        : String
-    }
+      name        : String,
+    },
+    isAdmin       : { type: Boolean, default: false }
 });
 
 userSchema.methods.generateHash = function(password){
